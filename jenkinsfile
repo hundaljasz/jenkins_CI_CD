@@ -52,7 +52,7 @@ pipeline {
         success {
             mail to: "jaskiratsingh20235@gmail.com",
             subject: "Build Status Email, when I did change in code.",
-            body: "successfully build."
+            body: "successfully build, now I am changing the code in the file."
         }
     }
 }
