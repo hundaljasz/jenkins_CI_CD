@@ -51,7 +51,7 @@ pipeline {
     post {
         success {
             mail to: "jaskiratsingh20235@gmail.com",
-            subject: "Build Status Email",
+            subject: "Build Status Email, when I did change in code.",
             body: "successfully build."
         }
     }
