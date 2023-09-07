@@ -1,0 +1,58 @@
+pipeline {
+    agent any
+    
+    environment {
+        DIRECTORY_PATH = "path/to/code"
+        TESTING_ENVIRONMENT = "test-environment"
+        PRODUCTION_ENVIRONMENT = "your-name-production"
+    }
+    
+    stages {
+        stage('Build') {
+            steps {
+                echo "Fetching code from: ${env.DIRECTORY_PATH}"
+                echo "Compiling the code & generating artifacts"
+            }
+        }
+        
+        stage('Testing') {
+            steps {
+                echo "Running unit test cases"
+                echo "Running integration test cases"
+            }
+        }
+        
+        stage('Code Quality stage') {
+            steps {
+                echo "Checking the code quality"
+            }
+        }
+        
+        stage('Deploy stage') {
+            steps {
+                echo "Deploying the application to env =  ${env.TESTING_ENVIRONMENT}"
+            }
+        }
+        
+        stage('Approval') {
+            steps {
+                echo "Waiting for manual approval......!"
+                sleep(time: 13, unit: 'SECONDS')
+            }
+        }
+        
+        stage('Deploy to the Production') {
+            steps {
+                echo "Deploying the code to env = ${env.PRODUCTION_ENVIRONMENT}"
+            }
+        }
+    }
+    
+    post {
+        success {
+            mail to: "jaskiratsingh20235@gmail.com",
+            subject: "Build Status Email",
+            body: "successfully build."
+        }
+    }
+}
